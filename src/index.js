@@ -15,12 +15,14 @@ loader.classList.replace('loader', 'is-hidden');
 catInfo.classList.add('is-hidden');
 
 fetchBreeds()
-
   .then(data => {
 
     new SlimSelect({
       select: selector,
       data: createMarkUpSelect(data),
+      settings: {
+    placeholderText: 'Cats breeds',
+  }
     })
 
   })
