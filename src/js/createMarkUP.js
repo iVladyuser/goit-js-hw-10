@@ -18,10 +18,12 @@ export function createMarkUpSelect(catSelect) {
 export function createMarkUpCatById(dataCat) {
   const { url, breeds } = dataCat;
   const divCatInfo = `<div class="tumb-img">
-  <img src="${url}" alt="${breeds[0].name}">
+  <img class="photo" src="${url}" alt="${breeds[0].name}">
+<div class="description-img">
   <h2>${breeds[0].name}</h2>
   <p>${breeds[0].description}</p>
   <h3>Temperament:${breeds[0].temperament}</h3>
+</div>
 </div>`;
   catInfo.innerHTML = divCatInfo;
 }

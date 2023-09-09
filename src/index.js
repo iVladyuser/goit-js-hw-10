@@ -1,6 +1,7 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import { createMarkUpCatById, createMarkUpSelect } from './js/createMarkUP';
 import {onFetchError} from './js/showError'
+import './style.css';
 
 console.log(createMarkUpCatById);
 
@@ -18,8 +19,7 @@ catInfo.classList.add('is-hidden');
 
 fetchBreeds()
   .then(data => {
-// createMarkUpSelect(data);
-      console.log(createMarkUpSelect(data));
+
     new SlimSelect({
       select: selector,
       data: createMarkUpSelect(data),
