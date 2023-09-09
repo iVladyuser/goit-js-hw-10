@@ -1,15 +1,12 @@
-import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
+import { createMarkUpCatById } from './js/createMarkUP';
+console.log(createMarkUpCatById);
 
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const ref = {
-  selector: document.querySelector('.breed-select'),
-  catInfo: document.querySelector('.cat-info'),
-  loader: document.querySelector('.loader'),
-  error: document.querySelector('.error'),
-};
+import ref from './js/refs';
 const { selector, catInfo, loader, error } = ref;
 
 loader.classList.replace('loader', 'is-hidden');
@@ -38,18 +35,14 @@ function onSelect(evt) {
   catInfo.classList.add('is-hidden');
 
   const breedId = evt.currentTarget.value;
+  console.log(breedId);
   fetchCatByBreed(breedId)
     .then(data => {
+      console.log(data);
       loader.classList.replace('loader', 'is-hidden');
       selector.classList.remove('is-hidden');
-      const { BASE_URL, breeds } = data[0];
-      //Якщо запит був успішний, під селектом у блоці div.cat-info з'являється зображення і розгорнута інформація про кота: назва породи, опис і темперамент.
-      catInfo.innerHTML = `<div class="tumb-img">
-  <img src="${BASE_URL}" alt="${breeds[0].name}">
-  <h2>${breeds[0].name}</h2>
-  <p>${breeds[0].description}</p>
-  <h3>Temperament:${breeds[0].temperament}</h3>
-</div>`;
+      console.log(data[0]);
+        createMarkUpCatById(data[0]);
       catInfo.classList.remove('is-hidden');
     })
     .catch(onFetchError);
