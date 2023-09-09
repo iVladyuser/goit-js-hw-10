@@ -1,5 +1,19 @@
 import ref from './refs';
+console.log(ref.catInfo);
+
 const { catInfo } = ref;
+
+export function createMarkUpSelect(catSelect) {
+// Неявне повернення
+    // return catSelect.map(element => ({ name: element.name, value: element.id }));
+
+    //Явне повернення
+    return catSelect.map(element => {
+         return { text: element.name, value: element.id };
+     })
+
+}
+
 
 export function createMarkUpCatById(dataCat) {
   const { url, breeds } = dataCat;

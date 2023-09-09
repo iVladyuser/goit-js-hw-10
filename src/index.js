@@ -1,29 +1,29 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
-import { createMarkUpCatById } from './js/createMarkUP';
+import { createMarkUpCatById, createMarkUpSelect } from './js/createMarkUP';
+import {onFetchError} from './js/showError'
+
 console.log(createMarkUpCatById);
 
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import ref from './js/refs';
-const { selector, catInfo, loader, error } = ref;
+const { selector, catInfo, loader } = ref;
 
 loader.classList.replace('loader', 'is-hidden');
-error.classList.add('is-hidden');
+
 catInfo.classList.add('is-hidden');
 
-let arrBreedsId = [];
+
 
 fetchBreeds()
   .then(data => {
-    data.forEach(element => {
-      arrBreedsId.push({ text: element.name, value: element.id });
-    });
+// createMarkUpSelect(data);
+      console.log(createMarkUpSelect(data));
     new SlimSelect({
       select: selector,
-      data: arrBreedsId,
-    });
+      data: createMarkUpSelect(data),
+    })
   })
   .catch(onFetchError);
 
@@ -42,23 +42,9 @@ function onSelect(evt) {
       loader.classList.replace('loader', 'is-hidden');
       selector.classList.remove('is-hidden');
       console.log(data[0]);
-        createMarkUpCatById(data[0]);
+      createMarkUpCatById(data[0]);
       catInfo.classList.remove('is-hidden');
     })
     .catch(onFetchError);
 }
 
-function onFetchError(error) {
-  selector.classList.remove('is-hidden');
-  loader.classList.replace('loader', 'is-hidden');
-
-  Notify.failure(
-    'Oops! Something went wrong! Try reloading the page or select another cat breed!',
-    {
-      position: 'center-center',
-      timeout: 5000,
-      width: '400px',
-      fontSize: '24px',
-    }
-  );
-}
