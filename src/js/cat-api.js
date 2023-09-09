@@ -5,6 +5,7 @@ axios.defaults.headers.common['x-api-key'] =
   'live_tykwXtjVO7B4PZO2ZOeOrrymEnGkGRbyDKSNUnmv2sgYApBfBHJYWLtwuNgLmOAi';
 
 export async function fetchBreeds() {
+
   const response = await axios.get('/breeds');
 
   return response.data;
@@ -30,3 +31,4 @@ export async function fetchCatByBreed(breedId) {
   //     return response.json();
   //   });
 }
+

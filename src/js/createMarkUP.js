@@ -22,7 +22,7 @@ export function createMarkUpCatById(dataCat) {
 <div class="description-img">
   <h2>${breeds[0].name}</h2>
   <p>${breeds[0].description}</p>
-  <h3>Temperament:${breeds[0].temperament}</h3>
+  <h3>Temperament: <span>${breeds[0].temperament}</span></h3>
 </div>
 </div>`;
   catInfo.innerHTML = divCatInfo;

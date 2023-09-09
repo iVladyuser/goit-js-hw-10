@@ -12,18 +12,17 @@ import ref from './js/refs';
 const { selector, catInfo, loader } = ref;
 
 loader.classList.replace('loader', 'is-hidden');
-
 catInfo.classList.add('is-hidden');
 
-
-
 fetchBreeds()
+
   .then(data => {
 
     new SlimSelect({
       select: selector,
       data: createMarkUpSelect(data),
     })
+
   })
   .catch(onFetchError);
 
