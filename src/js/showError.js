@@ -1,9 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import ref from './refs';
-const { selector,  loader, } = ref;
+const { selector,  loader, catInfo } = ref;
 
 export function onFetchError(error) {
-        selector.classList.remove('is-hidden');
+    catInfo.hidden = true;
+        selector.hidden = true;
     loader.classList.replace('loader', 'is-hidden');
 
     Notify.failure(

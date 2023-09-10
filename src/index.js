@@ -12,28 +12,27 @@ import ref from './js/refs';
 const { selector, catInfo, loader } = ref;
 
 loader.classList.replace('loader', 'is-hidden');
-catInfo.classList.add('is-hidden');
+catInfo.hidden = true;
 
 fetchBreeds()
   .then(data => {
-
     new SlimSelect({
       select: selector,
       data: createMarkUpSelect(data),
       settings: {
     placeholderText: 'Cats breeds',
-  }
+  },
     })
 
   })
   .catch(onFetchError);
 
+
+
 selector.addEventListener('change', onSelect);
 
 function onSelect(evt) {
   loader.classList.replace('is-hidden', 'loader');
-  selector.classList.add('is-hidden');
-  catInfo.classList.add('is-hidden');
 
   const breedId = evt.currentTarget.value;
   console.log(breedId);
@@ -44,8 +43,9 @@ function onSelect(evt) {
       selector.classList.remove('is-hidden');
       console.log(data[0]);
       createMarkUpCatById(data[0]);
-      catInfo.classList.remove('is-hidden');
+      
     })
-    .catch(onFetchError);
+    .catch(onFetchError)
+    .finally(catInfo.hidden = !true);
 }
 
